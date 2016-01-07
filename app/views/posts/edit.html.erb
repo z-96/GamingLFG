@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Register New List</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <p>Adding yourself to LFG:</p>
+      <ul>
+        <li>Fill out the necessary fields and find your group!</li>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <%= form_for @post do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Submit!", class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
