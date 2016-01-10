@@ -1,0 +1,146 @@
+<div class=container>
+  <h1>Post to a LFG</h1>
+  <div class="row">
+    <%= link_to "New Post", new_post_path, class: 'btn btn-success' %>
+  </div>
+
+  <div class="panel-heading cleafix">
+    <h2>Filter your LFG search</h2>
+      <div class="clearfix">
+        <div class="filter-third">
+          <div class="styled-select styled-blue">
+            <select id="searchConsoles">
+              <option value="%">Select Console</option>
+              <option value="PS4">Playstation 4</option>
+              <option value="XB1">Xbox One</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-third filter-middle">
+          <div class="styled-select styled-blue">
+            <select id="searchGames">
+              <option value="destiny">Destiny</option>
+              <option value="grandTheftAuto">Grand Theft Auto Online</option>
+            </select>
+          </div>
+        </div>
+      ##  #IF DESTINY SELECTED
+        <div class="filter-third filter-middle">
+          <div class="styled-select styled-blue">
+            <select id="searchActivityDestiny">
+              <optgroup label="Crucible">
+                <option value="%">Trials of Osiris (Flawless)</option>
+                <option value="%">Trials of Osiris (Casual/Fun)</option>
+                <option value="%">Trials of Osiris (Sherpa)</option>
+                <option value="%">Iron Banner</option>
+                <option value="%">Rift</option>
+                <option value="%">3v3</option>
+                <option value="%">6v6</option>
+              </optgroup>
+              <optgroup label="Raid Normal Mode">
+                <option value="%">Vault of Glass (Fresh Run) - Normal</option>
+                <option value="%">Vault of Glass (Checkpoint) - Normal</option>
+                <option value="%">Vault of Glass (Aetheon) - Normal</option>
+                <option value="%">Vault of Glass (Sherpa Help) - Normal</option>
+                <option value="%">Crota's End (Fresh Run) - Normal</option>
+                <option value="%">Crota's End (Checkpoint) - Normal</option>
+                <option value="%">Crota's End (Crota) - Normal</option>
+                <option value="%">Crota's End (Sherpa Help) - Normal</option>
+                <option value="%">King's Fall (Fresh Run) - Normal</option>
+                <option value="%">King's Fall (Totems) - Normal</option>
+                <option value="%">King's Fall (Warpriest) - Normal</option>
+                <option value="%">King's Fall (Golgoroth) - Normal</option>
+                <option value="%">King's Fall (Daughters) - Normal</option>
+                <option value="%">King's Fall (Oryx) - Normal</option>
+                <option value="%">King's Fall (Sherpa Help) - Normal</option>
+              </optgroup>
+              <optgroup label="Raid Hard Mode">
+                <option value="%">Vault of Glass (Fresh Run) - Hard</option>
+                <option value="%">Vault of Glass (Checkpoint) - Hard</option>
+                <option value="%">Vault of Glass (Aetheon) - Hard</option>
+                <option value="%">Vault of Glass (Sherpa Help) - Hard</option>
+                <option value="%">Crota's End (Fresh Run) - Hard</option>
+                <option value="%">Crota's End (Checkpoint) - Hard</option>
+                <option value="%">Crota's End (Crota) - Hard</option>
+                <option value="%">Crota's End (Sherpa Help) - Hard</option>
+                <option value="%">King's Fall (Fresh Run) - Hard</option>
+                <option value="%">King's Fall (Totems) - Hard</option>
+                <option value="%">King's Fall (Warpriest) - Hard</option>
+                <option value="%">King's Fall (Golgoroth) - Hard</option>
+                <option value="%">King's Fall (Daughters) - Hard</option>
+                <option value="%">King's Fall (Oryx) - Hard</option>
+                <option value="%">King's Fall (Sherpa Help) - Hard</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-third">
+        </div>
+
+      ##  #IF GRAND THEFT AUTO SELECTED
+        <div class="filter-third filter-middle">
+          <div class="styled-select styled-blue">
+            <select id="searchActivityGrandTheftAutoOnline">
+              <optgroup label="Heists">
+                <option value="%">The Fleeca Job (Fresh)</option>
+                <option value="%">The Fleeca Job</option>
+                <option value="%">The Prison Break (Fresh)</option>
+                <option value="%">The Prison Break</option>
+                <option value="%">The Humane Labs Raid (Fresh)</option>
+                <option value="%">The Humane Labs Raid</option>
+                <option value="%">Series A Funding (Fresh)</option>
+                <option value="%">Series A Funding</option>
+                <option value="%">The Pacific Standard Job (Fresh)</option>
+                <option value="%">The Pacific Standard Job</option>
+              </optgroup>
+              <optgroup label="Freemode">
+                <option value="%">V.I.P. Work</option>
+                <option value="%">Randumbness</option>
+              </optgroup>
+              <optgroup label="Vinewood Movie Studios">
+                <option value="%">Casting</option>
+              </optgroup>
+              <optgroup label="Jobs">
+                <option value="%">Last Team Standing</option>
+                <option value="%">Adversary Mode</option>
+                <option value="%">Team Deathmatch</option>
+                <option value="%">Mission</option>
+                <option value="%">Select Activity</option>
+                <option value="%">Select Activity</option>
+              </optgroup>
+              <optgroup label="Racing">
+                <option value="%">Playlist</option>
+                <option value="%">Random</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-third">
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <div class="filter-third filter-check">
+          <div class="checkbox>">
+            <label>
+              <input type="checkbox" value="1" id="searchMic" name="searchMic">
+              <span class="cr" style="pointer-events: none;">
+                <i class="cr-icon glyphicon glyphicon-ok"></i>
+              </span>
+              <span class="checkbox-text" style="pointer-events: none;">Got a mic?</div>
+            </label>
+          </div>
+        </div>
+      </div>
+  </div>
+
+#All posts shown below or according to filter
+
+  <div class="row">
+    <% @posts.each do |post| %>
+      <p><%= link_to post.name, post %></p>
+    <% end %>
+  </div>
+</div>
