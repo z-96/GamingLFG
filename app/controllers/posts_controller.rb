@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  belongs_to :user
 
   def index
     @posts = Post.all
+    @post = Post.new
   end
 
   def show

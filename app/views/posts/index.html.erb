@@ -4,13 +4,15 @@
     <%= link_to "New LFG Post", new_post_path, class: 'btn btn-success' %>
   </div>
 
-  <div class="panel-heading cleafix">
+<%= render "form" %>
+  <div class="panel-heading clearfix">
     <h2>Filter your LFG search</h2>
 
     ## #Search begin
 
-    <%= render @post._form %>
+
       <div class="clearfix">
+
         <div class="filter-third">
           <div class="styled-select styled-blue">
             <select id="searchConsoles">
@@ -134,8 +136,25 @@
         </div>
 
         <div class="filter-third">
+          <div class="styled-select styled-white">
+            <select id="searchGTALevel">
+              <optgroup label="GTA Level Ranking">
+                <option value="320"Light 320>
+                <option value="310"Light 310+>
+                <option value="300"Light 300+>
+                <option value="290"Light 290+>
+                <option value="280"Light 280+>
+                <option value="260"Light 260+>
+                <option value="240"Light 240+>
+                <option value="220"Light 220+>
+                <option value="200"Light 200+>
+                <option value="180"Light 180+ or lower>
+              </optgroup>
+            </select>
+          </div>
         </div>
-      </div>
+
+      </div> #clearfix end
 
       ## #If NBA 2k
 
@@ -175,7 +194,7 @@
       <div class="filter-third">
       </div>
 
-      ## #Mic Search box
+      ## #Mic box
 
       <div class="clearfix">
         <div class="filter-third filter-check">
@@ -189,14 +208,15 @@
             </label>
           </div>
         </div>
+
+
       </div>
-  </div>
+  ## #end of panel-heading clearfix
 
-#All posts shown below or according to filter
-
-  <div class="row">
-    <% @posts.each do |post| %>
-      <p><%= link_to post.name, post %></p>
-    <% end %>
-  </div>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <p><%= link_to post.name, post %></p>
+      <% end %>
+    </div>
 </div>
+#All posts shown below or according to filter

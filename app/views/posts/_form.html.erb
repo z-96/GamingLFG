@@ -1,32 +1,34 @@
-<%= form_for [@post, Post.new] do |f| %>
-<div class="form-group">
-  <%= f.label :name, "Add new item:" %>
-  <%= f.text_field :name %>
-</div>
+<%= form_for @post do |f| %>
 
 <div class="panel-heading clearfix">
   <h2>Fill out your LFG!</h2>
 
-  ## #Search begin
+  <br>
 
     <div class="clearfix">
       <div class="field">
       <%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, placeholder: "Enter Gamertag" %>
+      <%= f.text_field :name, autofocus: true, placeholder: "#{current_user.name}" %>
       </div>
+
+      <br>
 
       <div class="filter-third">
         <div class="styled-select styled-blue">
-          <select id="searchConsoles">
+          <select id="post_console" name="post[console]">
             <option value="%">Select Console</option>
             <option value="PS4">Playstation 4</option>
             <option value="XB1">Xbox One</option>
           </select>
         </div>
       </div>
+
+      <br>
+
       <div class="filter-third filter-middle">
         <div class="styled-select styled-blue">
-          <select id="searchGames">
+          <select id="post_games" name="post[games]">
+            <option value="%">Select Game</option>
             <option value="destiny">Destiny</option>
             <option value="grandTheftAuto">Grand Theft Auto Online</option>
             <option value="nba2k">NBA 2k</option>
@@ -34,10 +36,13 @@
           </select>
         </div>
       </div>
-    ##  #IF DESTINY SELECTED
-      <div class="filter-third filter-middle">
+
+      <br>
+
+      <div class="filter-third filter-middle" id="destinyFields" style="display: none;">
         <div class="styled-select styled-blue">
-          <select id="searchActivityDestiny">
+          <select id="post_searchActivityDestiny" name="post[searchActivityDestiny]">
+            <option value="%">Select Activity</option>
             <optgroup label="Crucible">
               <option value="too-flawless">Trials of Osiris Flawless </option>
               <option value="too-fun">Trials of Osiris Casual/Fun </option>
@@ -48,66 +53,82 @@
               <option value="6v6">6v6</option>
             </optgroup>
             <optgroup label="Raid Normal Mode">
-              <option value="vog-norm-fr">Vault of Glass Fresh Run - Normal</option>
-              <option value="vog-norm-cp">Vault of Glass Checkpoint - Normal</option>
-              <option value="vog-norm-boss">Vault of Glass Aetheon - Normal</option>
-              <option value="vog-norm-sherpa">Vault of Glass Sherpa Help - Normal</option>
-              <option value="crota-norm-fr">Crota's End Fresh Run - Normal</option>
-              <option value="crota-norm-cp">Crota's End Checkpoint - Normal</option>
-              <option value="crota-norm-boss">Crota's End Crota - Normal</option>
-              <option value="crota-norm-sherpa">Crota's End Sherpa Help - Normal</option>
-              <option value="kf-norm-fr">King's Fall Fresh Run - Normal</option>
-              <option value="kf-norm-totems">King's Fall Totems - Normal</option>
-              <option value="kf-norm-warpriest">King's Fall Warpriest - Normal</option>
-              <option value="kf-norm-golgoroth">King's Fall Golgoroth - Normal</option>
-              <option value="kf-norm-daughters">King's Fall Daughters - Normal</option>
-              <option value="kf-norm-oryx">King's Fall Oryx - Normal</option>
-              <option value="kf-norm-sherpa">King's Fall Sherpa Help - Normal</option>
+              <optgroup label="Vault of Glass - Normal">
+                <option value="vog-norm-fr">Vault of Glass Fresh Run - Normal</option>
+                <option value="vog-norm-cp">Vault of Glass Checkpoint - Normal</option>
+                <option value="vog-norm-boss">Vault of Glass Atheon - Normal</option>
+                <option value="vog-norm-sherpa">Vault of Glass Sherpa Help - Normal</option>
+              </optgroup>
+              <optgroup label="Crota's End - Normal">
+                <option value="crota-norm-fr">Crota's End Fresh Run - Normal</option>
+                <option value="crota-norm-cp">Crota's End Checkpoint - Normal</option>
+                <option value="crota-norm-boss">Crota's End Crota - Normal</option>
+                <option value="crota-norm-sherpa">Crota's End Sherpa Help - Normal</option>
+              </optgroup>
+              <optgroup label="King's Fall - Normal">
+                <option value="kf-norm-fr">King's Fall Fresh Run - Normal</option>
+                <option value="kf-norm-totems">King's Fall Totems - Normal</option>
+                <option value="kf-norm-warpriest">King's Fall Warpriest - Normal</option>
+                <option value="kf-norm-golgoroth">King's Fall Golgoroth - Normal</option>
+                <option value="kf-norm-daughters">King's Fall Daughters - Normal</option>
+                <option value="kf-norm-oryx">King's Fall Oryx - Normal</option>
+                <option value="kf-norm-sherpa">King's Fall Sherpa Help - Normal</option>
+              </optgroup>
             </optgroup>
             <optgroup label="Raid Hard Mode">
-              <option value="vog-hard-fr">Vault of Glass Fresh Run - Hard</option>
-              <option value="vog-hard-cp">Vault of Glass Checkpoint - Hard</option>
-              <option value="vog-hard-boss">Vault of Glass Aetheon - Hard</option>
-              <option value="vog-hard-sherpa">Vault of Glass Sherpa Help - Hard</option>
-              <option value="crota-hard-fr">Crota's End Fresh Run - Hard</option>
-              <option value="crota-hard-cp">Crota's End Checkpoint - Hard</option>
-              <option value="crota-hard-boss">Crota's End Crota - Hard</option>
-              <option value="crota-hard-sherpa">Crota's End Sherpa Help - Hard</option>
-              <option value="kf-hard-fr">King's Fall Fresh Run - Hard</option>
-              <option value="kf-hard-totems">King's Fall Totems - Hard</option>
-              <option value="kf-hard-warpriest">King's Fall Warpriest - Hard</option>
-              <option value="kf-hard-golgoroth">King's Fall Golgoroth - Hard</option>
-              <option value="kf-hard-daughters">King's Fall Daughters - Hard</option>
-              <option value="kf-hard-oryx">King's Fall Oryx - Hard</option>
-              <option value="kf-hard-sherpa">King's Fall Sherpa Help - Hard</option>
+              <optgroup label="Vault of Glass - Hard">
+                <option value="vog-hard-fr">Vault of Glass Fresh Run - Hard</option>
+                <option value="vog-hard-cp">Vault of Glass Checkpoint - Hard</option>
+                <option value="vog-hard-boss">Vault of Glass Atheon - Hard</option>
+                <option value="vog-hard-sherpa">Vault of Glass Sherpa Help - Hard</option>
+              </optgroup>
+              <optgroup label="Crota's End - Hard">
+                <option value="crota-hard-fr">Crota's End Fresh Run - Hard</option>
+                <option value="crota-hard-cp">Crota's End Checkpoint - Hard</option>
+                <option value="crota-hard-boss">Crota's End Crota - Hard</option>
+                <option value="crota-hard-sherpa">Crota's End Sherpa Help - Hard</option>
+              </optgroup>
+              <optgroup label="King's Fall - Hard">
+                <option value="kf-hard-fr">King's Fall Fresh Run - Hard</option>
+                <option value="kf-hard-totems">King's Fall Totems - Hard</option>
+                <option value="kf-hard-warpriest">King's Fall Warpriest - Hard</option>
+                <option value="kf-hard-golgoroth">King's Fall Golgoroth - Hard</option>
+                <option value="kf-hard-daughters">King's Fall Daughters - Hard</option>
+                <option value="kf-hard-oryx">King's Fall Oryx - Hard</option>
+                <option value="kf-hard-sherpa">King's Fall Sherpa Help - Hard</option>
+              </optgroup>
             </optgroup>
           </select>
         </div>
-      </div>
 
-      <div class="filter-third">
-        <div class="styled-select styled-white">
-          <select id="searchDestinyLightLevel">
-            <optgroup label="Light Level">
-              <option value="320"Light 320>
-              <option value="310"Light 310+>
-              <option value="300"Light 300+>
-              <option value="290"Light 290+>
-              <option value="280"Light 280+>
-              <option value="260"Light 260+>
-              <option value="240"Light 240+>
-              <option value="220"Light 220+>
-              <option value="200"Light 200+>
-              <option value="180"Light 180+ or lower>
-            </optgroup>
-          </select>
+        <br>
+
+        <div class="filter-third">
+          <div class="styled-select styled-white">
+            <select id="post_searchDestinyLightLevel" name="post[searchDestinyLightLevel]">
+              <optgroup label="Light Level">
+                <option value="%">Select Light Level</option>
+                <option value="320">Light 320</option>
+                <option value="310">Light 310+</option>
+                <option value="300">Light 300+</option>
+                <option value="290">Light 290+</option>
+                <option value="280">Light 280+</option>
+                <option value="260">Light 260+</option>
+                <option value="240">Light 240+</option>
+                <option value="220">Light 220+</option>
+                <option value="200">Light 200+</option>
+                <option value="180">Light 180+ or lower</option>
+              </optgroup>
+            </select>
+          </div>
         </div>
       </div>
 
-    ##  #IF GRAND THEFT AUTO SELECTED
-      <div class="filter-third filter-middle">
+
+
+      <div class="filter-third filter-middle"  id="gtaFields" style="display: none;">
         <div class="styled-select styled-blue">
-          <select id="searchActivityGrandTheftAutoOnline">
+          <select id="post_searchActivityGrandTheftAutoOnline" name="post[searchActivityGrandTheftAutoOnline]">
             <optgroup label="Heists">
               <option value="heist-flecca">The Fleeca Job</option>
               <option value="heist-prison">The Prison Break</option>
@@ -135,50 +156,71 @@
             </optgroup>
           </select>
         </div>
-      </div>
 
-      <div class="filter-third">
-        <div class="styled-select styled-white">
-          <select id="searchGTALevel">
-            <optgroup label="GTA Level Ranking">
-              <option value="320"Light 320>
-              <option value="310"Light 310+>
-              <option value="300"Light 300+>
-              <option value="290"Light 290+>
-              <option value="280"Light 280+>
-              <option value="260"Light 260+>
-              <option value="240"Light 240+>
-              <option value="220"Light 220+>
-              <option value="200"Light 200+>
-              <option value="180"Light 180+ or lower>
-            </optgroup>
-          </select>
+        <br>
+
+          <div class="filter-third">
+            <div class="styled-select styled-white">
+              <select id="post_searchGTALevel" name="post[searchGTALevel]">
+                <optgroup label="GTA Level Ranking">
+                  <option value="gta10">10+</option>
+                  <option value="gta20">20+</option>
+                  <option value="gta30">30+</option>
+                  <option value="gta40">40+</option>
+                  <option value="gta50">50+</option>
+                  <option value="gta60">60+</option>
+                  <option value="gta70">70+</option>
+                  <option value="gta80">80+</option>
+                  <option value="gta90">90+</option>
+                  <option value="gta100">100+</option>
+                  <option value="gta200">200+</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
 
-    </div> #clearfix end
 
-    ## #If NBA 2k
 
-    <div class="filter-third filter-middle">
+
+
+
+
+
+    <div class="filter-third filter-middle"  id="nba2kFields" style="display: none;">
       <div class="styled-select styled-blue">
-        <select id="searchActivityNBA2k">
+        <select id="post_searchActivityNBA2k" name="post[searchActityNBA2k]">
           <optgroup label="My Career">
             <option value="2k-my-park">My Park</option>
             <option value="2k-pro-am">2K Pro-Am</option>
           </optgroup>
         </select>
       </div>
+
+      <br>
+
+      <div class="filter-third">
+        <div class="styled-select styled-white">
+          <select id="post_searchNBAPosition" name="post[searchNBAPosition]">
+            <optgroup label="Position">
+              <option value="guard-nba">Guard</option>
+              <option value="forward-nba">Forward</option>
+              <option value="center-nba">Center</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
     </div>
 
-    <div class="filter-third">
-    </div>
 
-    ## #If Dragon Age: Inquisition
 
-    <div class="filter-third filter-middle">
+
+
+
+    <div class="filter-third filter-middle" id="dragonageinquisitionFields" style="display: none;">
       <div class="styled-select styled-blue">
-        <select id="searchActivityDAInquisition">
+        <select id="post_searchActivityDAInquisition" name="post[searchActivityDAInquisition]">
           <optgroup label="Regular Multiplayer Playlist">
             <option value="da-routine">Routine</option>
             <option value="da-threatening">Threatening</option>
@@ -193,10 +235,10 @@
       </div>
     </div>
 
-    <div class="filter-third">
-    </div>
 
-    ## #Mic box
+  </div> #clearfix end
+
+<br>
 
     <div class="clearfix">
       <div class="filter-third filter-check">
@@ -211,9 +253,9 @@
         </div>
       </div>
 
-      <div class="form-group text-area has-feedback has-success">
-        <textarea rows="4" name="notesComment" id="notesComment" placeholder="(optional)" data-fv-field="notesComment"></textarea>
-        <span class="help-block">Looking for something more specific?  List it above.  140 char max.</span>
+      <div class="form-group">
+        <%= f.label :notes %>
+        <%= f.text_area :notes, rows: 4, class: 'form-control', placeholder: "Enter notes: Experienced, Leader" %>
       </div>
 
     </div>
@@ -222,6 +264,32 @@
 
 
 <div class="form-group">
-  <%= f.submit "Save", class: 'btn btn-success' %>
+  <%= f.submit "Submit!", class: 'btn btn-success' %>
 </div>
 <% end %>
+<script>
+  $("#post_games").change(
+    function(){
+      if ($("#post_games").val() == "destiny") {
+        $("#destinyFields").show();
+      } else {
+        $("#destinyFields").hide();
+      }
+      if ($("#post_games").val() == "grandTheftAuto") {
+        $("#gtaFields").show();
+      } else {
+        $("#gtaFields").hide();
+      }
+      if ($("#post_games").val() == "nba2k") {
+        $("#nba2kFields").show();
+      } else {
+        $("#nba2kFields").hide();
+      }
+      if ($("#post_games").val() == "dragonageinquisition") {
+        $("#dragonageinquisitionFields").show();
+      } else {
+        $("#dragonageinquisitionFields").hide();
+      }
+    }
+  );
+</script>
