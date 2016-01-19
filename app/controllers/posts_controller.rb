@@ -17,8 +17,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
     @post.user = current_user
+    @post = Post.new(post_params)
     if @post.save
       flash[:notice] = "Posted!"
       redirect_to @post

@@ -5,4 +5,6 @@ class Post < ActiveRecord::Base
     create_date = created_at.to_date
     (create_date + 45.minutes - create_date).to_i
   end
+
+
 end
